@@ -7,3 +7,9 @@ export default {
 } as Meta
 
 export const Default: Story = () => <Search />
+
+Default.parameters = {
+  backgrounds: {
+    default: 'dark'
+  }
+}

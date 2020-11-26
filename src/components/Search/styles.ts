@@ -52,6 +52,7 @@ export const SearchOverlay = styled.div<SearchOverlayProps>`
     background-color: ${rgba(theme.colors.secondary, 0.8)};
     z-index: ${visible ? theme.layers.alwaysOnTop : -100};
     opacity: ${visible ? 1 : 0};
+    pointer-events: ${visible ? 'all' : 'none'};
   `}
   > div {
     height: 100%;

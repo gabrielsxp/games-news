@@ -9,6 +9,17 @@ type NavLinkProps = {
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 14rem;
+  ${({ theme }) => css`
+    z-index: ${theme.layers.overlay};
+  `}
+  & [class^="Container"] {
+    max-height: 100%;
+  }
 `
 export const TopBar = styled.div`
   background: transparent;
