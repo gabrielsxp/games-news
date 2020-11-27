@@ -14,6 +14,7 @@ export const Wrapper = styled.div`
   left: 0;
   width: 100%;
   height: 14rem;
+  overflow-x: hidden;
   ${({ theme }) => css`
     z-index: ${theme.layers.overlay};
   `}

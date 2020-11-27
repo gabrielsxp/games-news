@@ -7,9 +7,22 @@ export default {
   component: NewsCard
 } as Meta
 
-console.log(mock)
+export const Default: Story<NewsCardProps> = (args) => (
+  <div style={{ width: '30rem', height: '30rem' }}>
+    <NewsCard {...args} />
+  </div>
+)
 
-export const Default: Story<NewsCardProps> = (args) => <NewsCard {...args} />
+export const HighLight: Story<NewsCardProps> = (args) => (
+  <div style={{ width: '65rem', height: '65rem' }}>
+    <NewsCard {...args} />
+  </div>
+)
+
 Default.args = {
   ...mock
+}
+HighLight.args = {
+  ...mock,
+  highlight: true
 }

@@ -1,6 +1,6 @@
 import * as S from './styles'
 import Navbar from 'components/Navbar'
-import { Container } from 'components/Container'
+import Footer from 'components/Footer'
 
 export type HomeTemplateProps = {
   children?: React.ReactNodeArray | React.ReactNode
@@ -10,7 +10,7 @@ const HomeTemplate = ({ children }: HomeTemplateProps) => (
   <S.Wrapper>
     <Navbar />
     {children}
-    {/* Footer */}
+    <Footer />
   </S.Wrapper>
 )
 

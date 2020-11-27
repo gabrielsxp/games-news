@@ -1,13 +1,14 @@
-import { render, screen } from '@testing-library/react'
-
+import { screen } from '@testing-library/react'
+import mock from './mock'
 import SocialLink from '.'
+import { renderWithTheme } from 'utils/helpers'
 
 describe('<SocialLink />', () => {
   it('should render the heading', () => {
-    const { container } = render(<SocialLink />)
-
-    expect(screen.getByRole('heading', { name: /SocialLink/i })).toBeInTheDocument()
-
-    expect(container.firstChild).toMatchSnapshot()
+    renderWithTheme(<SocialLink {...mock} title="Facebook" />)
+    expect(screen.getByLabelText(/Facebook icon/i)).toBeInTheDocument()
+    expect(
+      screen.getByLabelText(/Facebook icon/i).closest('a')
+    ).toHaveAttribute('href', 'https://facebook.com')
   })
 })
