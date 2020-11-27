@@ -4,10 +4,45 @@ import { Container } from 'components/Container'
 import Search from 'components/Search'
 import MediaMatch from 'components/MediaMatch'
 import { MenuAltRight } from '@styled-icons/boxicons-regular/MenuAltRight'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import useScrollPosition from '@react-hook/window-scroll'
+import { useWindowSize } from 'utils/helpers'
+
+type NavbarPositionProps = 'fixed' | 'absolute'
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false)
+  const [navbarPosition, setNavbarPosition] = useState(
+    'absolute' as NavbarPositionProps
+  )
+  const [navbarTop, setNavbarTop] = useState<number>(0)
+  const scrollY = useScrollPosition(30)
+  const { width } = useWindowSize()
+
+  useEffect(() => {
+    if (typeof width === 'number') {
+      if (scrollY > 70 && width > 599) {
+        const position = 'fixed' as NavbarPositionProps
+        setNavbarPosition(position)
+        setNavbarTop(0)
+      } else if (scrollY > 70 && width <= 599) {
+        const position = 'fixed' as NavbarPositionProps
+        setNavbarPosition(position)
+        setNavbarTop(0)
+      } else if (scrollY <= 70 && width > 599) {
+        const position = 'absolute' as NavbarPositionProps
+        setNavbarPosition(position)
+        setNavbarTop(70)
+      } else {
+        const position = 'fixed' as NavbarPositionProps
+        setNavbarPosition(position)
+        setNavbarTop(0)
+      }
+    } else {
+      const position = 'absolute' as NavbarPositionProps
+      setNavbarPosition(position)
+    }
+  }, [scrollY, width])
 
   return (
     <S.Wrapper>
@@ -39,7 +74,12 @@ const Navbar = () => {
           </Container>
         </S.TopBar>
       </MediaMatch>
-      <S.BottomBar>
+      <S.BottomBar
+        style={{
+          position: navbarPosition,
+          top: navbarTop
+        }}
+      >
         <Container>
           <S.NavWrapper>
             <S.ContentWrapper>

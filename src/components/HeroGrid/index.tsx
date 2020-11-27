@@ -5,10 +5,11 @@ import MediaMatch from 'components/MediaMatch'
 import { NewsCardProps } from 'components/NewsCard'
 export type HeroGridProps = {
   cards?: NewsCardProps[]
+  reduced?: boolean
 }
 
-const HeroGrid = ({ cards }: HeroGridProps) => (
-  <S.Wrapper>
+const HeroGrid = ({ cards, reduced }: HeroGridProps) => (
+  <S.Wrapper reduced={reduced}>
     {cards && cards[0] && (
       <>
         <MediaMatch lessThan="medium">
@@ -19,7 +20,7 @@ const HeroGrid = ({ cards }: HeroGridProps) => (
         </MediaMatch>
       </>
     )}
-    <S.SubWrapper>
+    <S.SubWrapper reduced={reduced}>
       {cards &&
         cards.slice(1, 5).map((card, index) => {
           return <NewsCard key={index} {...card} />

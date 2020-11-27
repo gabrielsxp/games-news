@@ -9,7 +9,7 @@ type NavLinkProps = {
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -40,6 +40,9 @@ export const BottomBar = styled.div`
     position: relative;
     background-color: ${theme.colors.primary};
     height: 7rem;
+    width: 100vw;
+    top: 7rem;
+    transition: all 0.1s ease;
 
     ${media.lessThan('medium')`
       height: 5rem;

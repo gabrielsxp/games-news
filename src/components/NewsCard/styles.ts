@@ -71,7 +71,7 @@ export const LabelsWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   > div {
-    margin: 1rem;
+    margin: 0.5rem;
   }
   > div:first-of-type {
     margin-left: 0;
