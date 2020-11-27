@@ -4,7 +4,7 @@ import NewsCard from '.'
 import mock from './mock'
 
 describe('<NewsCard />', () => {
-  it('should render the heading', () => {
+  it('should render a news card', () => {
     renderWithTheme(<NewsCard {...mock} />)
 
     expect(

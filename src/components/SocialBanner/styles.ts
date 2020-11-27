@@ -5,8 +5,8 @@ import { SocialBannerProps } from '.'
 export const Wrapper = styled.a`
   width: 100%;
   display: grid;
-  grid-template-columns: 30% 70%;
-  height: 5rem;
+  grid-template-columns: 25% 75%;
+  height: 6rem;
   width: 100%;
   text-decoration: none;
 `
@@ -39,6 +39,7 @@ export const ContentWrapper = styled.div<Pick<SocialBannerProps, 'color'>>`
       font-size: ${theme.font.sizes.large};
       color: ${theme.colors.white};
       font-weight: bold;
+      letter-spacing: 0.1rem;
     }
   `}
 `

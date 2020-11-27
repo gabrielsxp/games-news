@@ -20,3 +20,17 @@ export const Section = styled.section`
     padding: ${theme.spacings.medium} 0;
   `}
 `
+export const SocialBannersContainer = styled.section`
+  ${({ theme }) => css`
+    display: flex;
+    flex-direction: column;
+    padding-top: 2rem;
+
+    > a {
+      margin-bottom: ${theme.spacings.xxsmall};
+    }
+    > a:last-child {
+      margin-bottom: 0;
+    }
+  `}
+`
