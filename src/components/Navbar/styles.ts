@@ -82,7 +82,7 @@ export const ContentWrapper = styled.div`
     > div > a:last-of-type {
       margin-right: 0;
     }
-    > div:first-child > a {
+    > div:first-child {
       margin-right: ${theme.spacings.small};
     }
   `}

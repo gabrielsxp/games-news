@@ -21,7 +21,7 @@ const ArticleCard = ({
     )}
     <S.ContentWrapper>
       {!!created_at && (
-        <S.TimeContent>
+        <S.TimeContent highlight={highlight}>
           <ClockIcon />
           <span>{moment(created_at).format('MMMM Do YYYY, h:mm:ss a')}</span>
         </S.TimeContent>

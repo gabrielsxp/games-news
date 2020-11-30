@@ -16,7 +16,7 @@ const cards: NewsCardProps[] = Array.from(new Array(5)).reduce((acc) => {
   acc = acc.concat(mock)
   return acc
 }, [])
-const articles: ArticleCardProps[] = Array.from(new Array(5)).reduce((acc) => {
+const articles: ArticleCardProps[] = Array.from(new Array(6)).reduce((acc) => {
   acc = acc.concat(articleMock)
   return acc
 }, [])

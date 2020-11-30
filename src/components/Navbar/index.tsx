@@ -18,7 +18,7 @@ const Navbar = ({ variant = false }: NavbarProps) => {
   const [navbarPosition, setNavbarPosition] = useState(
     'absolute' as NavbarPositionProps
   )
-  const [navbarShadow, setNavbarShadow] = useState('none')
+  const [navbarBorder, setNavbarBorder] = useState('none')
   const [navbarTop, setNavbarTop] = useState<number>(0)
   const scrollY = useScrollPosition(30)
   const { width } = useWindowSize()
@@ -29,24 +29,22 @@ const Navbar = ({ variant = false }: NavbarProps) => {
         const position = 'fixed' as NavbarPositionProps
         setNavbarPosition(position)
         setNavbarTop(0)
-        setNavbarShadow('none')
+        setNavbarBorder('1px solid rgba(244, 5, 49, 0.3)')
       } else if (scrollY > 70 && width <= 599) {
         const position = 'fixed' as NavbarPositionProps
         setNavbarPosition(position)
         setNavbarTop(0)
-        setNavbarShadow('none')
+        setNavbarBorder('1px solid rgba(0, 0, 0, 0.3)')
       } else if (scrollY <= 70 && width > 599) {
         const position = 'absolute' as NavbarPositionProps
         setNavbarPosition(position)
         setNavbarTop(variant ? 0 : 70)
-        setNavbarShadow('none')
+        setNavbarBorder('1px solid rgba(0, 0, 0, 0.3)')
       } else {
         const position = 'fixed' as NavbarPositionProps
         setNavbarPosition(position)
         setNavbarTop(0)
-        setNavbarShadow(
-          '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)'
-        )
+        setNavbarBorder('1px solid rgba(0, 0, 0, 0.3)')
       }
     } else {
       const position = 'absolute' as NavbarPositionProps
@@ -90,7 +88,7 @@ const Navbar = ({ variant = false }: NavbarProps) => {
         style={{
           position: navbarPosition,
           top: navbarTop,
-          boxShadow: navbarShadow
+          borderBottom: navbarBorder
         }}
         variant={variant}
       >

@@ -2,6 +2,7 @@ import * as S from './styles'
 import ArticleCard from 'components/ArticleCard'
 import MediaMatch from 'components/MediaMatch'
 import { ArticleCardProps } from 'components/ArticleCard'
+import SideCard from 'components/SideCard'
 
 export type ArticleGridProps = {
   cards?: ArticleCardProps[]
@@ -17,12 +18,13 @@ const ArticleGrid = ({ cards, reduced }: ArticleGridProps) => (
         </MediaMatch>
         <MediaMatch greaterThan="medium">
           <ArticleCard highlight key={cards[0].id} {...cards[0]} />
+          <SideCard key={cards[1].id} {...cards[1]} />
         </MediaMatch>
       </>
     )}
     <S.SubWrapper reduced={reduced}>
       {cards &&
-        cards.slice(1, 5).map((card, index) => {
+        cards.slice(2, 6).map((card, index) => {
           return <ArticleCard key={index} {...card} />
         })}
     </S.SubWrapper>

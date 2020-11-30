@@ -1,21 +1,21 @@
 import { Story, Meta } from '@storybook/react/types-6-0'
-import ArticleCard, { ArticleCardProps } from '.'
+import ArchiveCard, { ArchiveCardProps } from '.'
 import mock from './mock'
 
 export default {
-  title: 'ArticleCard',
-  component: ArticleCard
+  title: 'ArchiveCard',
+  component: ArchiveCard
 } as Meta
 
-export const Default: Story<ArticleCardProps> = (args) => (
+export const Default: Story<ArchiveCardProps> = (args) => (
   <div style={{ width: '30rem', height: '30rem' }}>
-    <ArticleCard {...args} />
+    <ArchiveCard {...args} />
   </div>
 )
 
-export const HighLight: Story<ArticleCardProps> = (args) => (
+export const HighLight: Story<ArchiveCardProps> = (args) => (
   <div style={{ width: '65rem', height: '65rem' }}>
-    <ArticleCard {...args} />
+    <ArchiveCard {...args} />
   </div>
 )
 

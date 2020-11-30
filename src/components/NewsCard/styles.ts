@@ -1,6 +1,7 @@
 import styled, { css, DefaultTheme } from 'styled-components'
 import media from 'styled-media-query'
 import { rgba } from 'polished'
+import { NewsCardProps } from '.'
 
 type LabelProps = {
   color?: string
@@ -118,18 +119,20 @@ export const ContentTitle = styled.a<ContentTypeProps>`
     }
   `}
 `
-export const TimeContent = styled.div`
-  ${({ theme }) => css`
+export const TimeContent = styled.div<Pick<NewsCardProps, 'highlight'>>`
+  ${({ theme, highlight }) => css`
     display: flex;
     align-items: center;
     & > svg {
-      width: 2.4rem;
-      height: 2.4rem;
+      width: ${highlight ? '2.4rem' : '1.8rem'};
+      height: ${highlight ? '2.4rem' : '1.8rem'};
       color: ${theme.colors.white};
       margin-right: ${theme.spacings.xxsmall};
     }
     & > span {
-      font-size: ${theme.font.sizes.small};
+      font-size: ${highlight
+        ? theme.font.sizes.small
+        : theme.font.sizes.xsmall};
       color: ${theme.colors.white};
     }
   `}

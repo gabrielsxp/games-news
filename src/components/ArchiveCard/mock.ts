@@ -3,9 +3,9 @@ export default {
   created_at: '2020-11-25T17:44:47.000Z',
   updated_at: '2020-11-25T17:44:47.000Z',
   title: 'Black Friday 2020: Crash Bandicoot 4 Spins Down To $30',
+  slug: 'black-friday-2020-crash-bandicoot-4-spins-down-to-dollar30',
   lede:
     "Crash Bandicoot 4 is the first new game in the platformer franchise in years, and it'll be 50% off for Black Friday.",
-  slug: 'black-friday-2020-crash-bandicoot-4-spins-down-to-dollar30',
   categories: [
     {
       name: 'Games',

@@ -25,17 +25,18 @@ export const Wrapper = styled.div<Pick<ArticleCardProps, 'highlight'>>`
   ${({ theme, highlight }) => css`
     position: relative;
     width: 100%;
-    height: 100%;
+    height: ${highlight ? 'auto' : '50%'};
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     overflow: hidden;
     border: ${theme.border.radius};
+    margin-bottom: ${highlight ? theme.spacings.xxlarge : '0'};
     > img {
       position: relative;
       object-fit: cover;
       width: 100%;
-      height: ${highlight ? '70%' : '50%'};
+      height: ${highlight ? '70%' : 'auto'};
       transition: all 0.5s ease;
     }
     &:hover {
@@ -88,7 +89,7 @@ export const ContentWrapper = styled.div`
   ${({ theme }) => css`
     z-index: ${theme.layers.menu};
     background-color: ${theme.colors.white};
-    padding: ${theme.spacings.xsmall};
+    padding: ${theme.spacings.xxsmall};
   `}
 `
 export const ContentTitle = styled.a<ContentTypeProps>`
@@ -103,8 +104,8 @@ export const ContentTitle = styled.a<ContentTypeProps>`
     }
   `}
 `
-export const TimeContent = styled.div`
-  ${({ theme }) => css`
+export const TimeContent = styled.div<Pick<ArticleCardProps, 'highlight'>>`
+  ${({ theme, highlight }) => css`
     display: flex;
     align-items: center;
     margin-bottom: ${theme.spacings.xsmall};
@@ -115,7 +116,9 @@ export const TimeContent = styled.div`
       margin-right: ${theme.spacings.xxsmall};
     }
     & > span {
-      font-size: ${theme.font.sizes.small};
+      font-size: ${highlight
+        ? theme.font.sizes.small
+        : theme.font.sizes.xsmall};
       color: ${theme.colors.secondary};
     }
   `}

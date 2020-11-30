@@ -65,6 +65,7 @@ export const Wrapper = styled.div`
       }
       p {
         opacity: 1;
+        margin-top: 0rem;
       }
       > img {
         transform: scale(1.1);
@@ -138,7 +139,8 @@ export const LedeContent = styled.p`
     line-height: 1.8rem;
     color: ${theme.colors.white};
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: all 0.25s ease-in-out;
+    margin-top: -5rem;
   `}
 `
 

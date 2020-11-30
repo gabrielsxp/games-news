@@ -4,9 +4,9 @@ import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { ClockOutline as ClockIcon } from '@styled-icons/evaicons-outline/ClockOutline'
 import moment from 'moment'
 
-export type ArticleCardProps = typeof mock & { highlight?: boolean }
+export type ArchiveCardProps = typeof mock & { highlight?: boolean }
 
-const ArticleCard = ({
+const ArchiveCard = ({
   slug,
   categories,
   title,
@@ -14,7 +14,7 @@ const ArticleCard = ({
   created_at,
   image,
   highlight = false
-}: ArticleCardProps) => (
+}: ArchiveCardProps) => (
   <S.Wrapper>
     {image && !!image.url && (
       <LazyLoadImage alt={title} src={image.url}></LazyLoadImage>
@@ -52,4 +52,4 @@ const ArticleCard = ({
   </S.Wrapper>
 )
 
-export default ArticleCard
+export default ArchiveCard

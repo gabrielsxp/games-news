@@ -63,13 +63,13 @@ export const TimeContent = styled.div`
     align-items: center;
     margin-bottom: ${theme.spacings.xsmall};
     & > svg {
-      width: 2.4rem;
-      height: 2.4rem;
+      width: 1.8rem;
+      height: 1.8rem;
       color: ${theme.colors.primary};
       margin-right: ${theme.spacings.xxsmall};
     }
     & > span {
-      font-size: ${theme.font.sizes.small};
+      font-size: ${theme.font.sizes.xsmall};
       color: ${lighten(0.2, theme.colors.secondary)};
     }
   `}

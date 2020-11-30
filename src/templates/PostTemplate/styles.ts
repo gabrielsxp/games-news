@@ -64,6 +64,13 @@ export const PostContent = styled.article`
     padding-top: 4rem;
   `}
 `
+export const PostsContent = styled.article`
+  min-height: 100vh;
+  padding-top: 2rem;
+  ${media.lessThan('medium')`
+    padding-top: 4rem;
+  `}
+`
 export const ContentTitle = styled.h1`
   ${({ theme }) => css`
     color: ${theme.colors.secondary};
@@ -175,5 +182,26 @@ export const RelatedContainer = styled.div`
     ${media.greaterThan('medium')`
     grid-template-columns: repeat(3, 1fr);
     `}
+  `}
+`
+export const PostsContainer = styled.div`
+  ${({ theme }) => css`
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: ${theme.grid.gutter};
+    ${media.greaterThan('medium')`
+    grid-template-columns: repeat(2, 1fr);
+    > div {
+      height: 40rem;
+    }
+  `};
+  `}
+`
+export const SearchInputsContainer = styled.div`
+  ${({ theme }) => css`
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: ${theme.grid.gutter};
+    margin-bottom: ${theme.spacings.small};
   `}
 `

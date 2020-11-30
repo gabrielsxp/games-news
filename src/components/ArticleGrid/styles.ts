@@ -17,10 +17,11 @@ export const Wrapper = styled.div<Pick<ArticleGridProps, 'reduced'>>`
     ${media.greaterThan('medium')`
       grid-template-columns: repeat(2, 1fr);
       padding-top: ${reduced ? '2rem' : '14rem'};
-      height: 65rem;
+      height: auto;
+      align-items: start;
   `}
 
-  > div {
+    > div {
       height: 100%;
     }
   `}
