@@ -11,8 +11,9 @@ import { Input } from '@chakra-ui/react'
 import { Select } from '@chakra-ui/react'
 import { Button } from '@chakra-ui/react'
 import { ArchiveCardProps } from 'components/ArchiveCard'
+import Pagination from 'components/Pagination'
 
-const cards: ArchiveCardProps[] = Array.from(new Array(5)).reduce((acc) => {
+const cards: ArchiveCardProps[] = Array.from(new Array(6)).reduce((acc) => {
   acc = acc.concat(mock)
   return acc
 }, [])
@@ -65,6 +66,7 @@ const Post = () => (
                     return <ArchiveCard {...card} key={index} />
                   })}
               </S.PostsContainer>
+              <Pagination></Pagination>
             </S.Section>
             <S.Section>
               <SectionHeading title="Most Viewed" />
