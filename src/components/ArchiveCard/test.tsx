@@ -1,11 +1,11 @@
 import { screen } from '@testing-library/react'
 import { renderWithTheme } from 'utils/helpers'
-import NewsCard from '.'
+import ArticleCard from '.'
 import mock from './mock'
 
-describe('<NewsCard />', () => {
+describe('<ArticleCard />', () => {
   it('should render a news card', () => {
-    renderWithTheme(<NewsCard {...mock} />)
+    renderWithTheme(<ArticleCard {...mock} />)
 
     expect(
       screen

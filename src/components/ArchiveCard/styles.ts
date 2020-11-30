@@ -31,6 +31,9 @@ export const Wrapper = styled.div`
     overflow: hidden;
     border: ${theme.border.radius};
     padding: ${theme.spacings.xsmall};
+    > * {
+      transition: all 0.5s ease;
+    }
     > img {
       position: absolute;
       top: 0;
@@ -49,15 +52,25 @@ export const Wrapper = styled.div`
       left: 0;
       width: 100%;
       height: 100%;
+      transition: all 0.5s ease;
 
       ${({ theme }) => css`
-        background-color: ${rgba(theme.colors.secondary, 0.5)};
+        background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.9));
         z-index: ${theme.layers.base};
       `}
     }
     &:hover {
+      > * {
+        transform: translateY(-7%);
+      }
+      p {
+        opacity: 1;
+      }
       > img {
-        transform: scale(1.1) rotate(5deg);
+        transform: scale(1.1);
+      }
+      &:after {
+        background-color: ${rgba(theme.colors.secondary, 0.3)};
       }
     }
 
@@ -118,10 +131,22 @@ export const ContentTitle = styled.a<ContentTypeProps>`
     }
   `}
 `
+
+export const LedeContent = styled.p`
+  ${({ theme }) => css`
+    font-size: ${theme.font.sizes.medium};
+    line-height: 1.8rem;
+    color: ${theme.colors.white};
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  `}
+`
+
 export const TimeContent = styled.div`
   ${({ theme }) => css`
     display: flex;
     align-items: center;
+    margin: ${theme.spacings.xxsmall} 0;
     & > svg {
       width: 2.4rem;
       height: 2.4rem;

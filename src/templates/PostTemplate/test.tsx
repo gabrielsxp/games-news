@@ -1,13 +1,10 @@
-import { render, screen } from '@testing-library/react'
+// import { screen } from '@testing-library/react'
 
 import PostTemplate from '.'
+import { renderWithTheme } from 'utils/helpers'
 
 describe('<PostTemplate />', () => {
-  it('should render the heading', () => {
-    const { container } = render(<PostTemplate />)
-
-    expect(screen.getByRole('heading', { name: /PostTemplate/i })).toBeInTheDocument()
-
-    expect(container.firstChild).toMatchSnapshot()
+  it('should render the template', () => {
+    renderWithTheme(<PostTemplate />)
   })
 })

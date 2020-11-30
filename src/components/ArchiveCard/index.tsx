@@ -4,35 +4,22 @@ import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { ClockOutline as ClockIcon } from '@styled-icons/evaicons-outline/ClockOutline'
 import moment from 'moment'
 
-export type NewsCardProps = typeof mock & { highlight?: boolean }
+export type ArticleCardProps = typeof mock & { highlight?: boolean }
 
-const NewsCard = ({
+const ArticleCard = ({
   slug,
   categories,
   title,
+  lede,
   created_at,
   image,
   highlight = false
-}: NewsCardProps) => (
+}: ArticleCardProps) => (
   <S.Wrapper>
     {image && !!image.url && (
       <LazyLoadImage alt={title} src={image.url}></LazyLoadImage>
     )}
     <S.ContentWrapper>
-      {!!title && (
-        <S.ContentTitle
-          href={`/post/${encodeURIComponent(slug)}`}
-          size={highlight ? 'large' : 'normal'}
-        >
-          {title}
-        </S.ContentTitle>
-      )}
-      {!!created_at && (
-        <S.TimeContent>
-          <ClockIcon />
-          <span>{moment(created_at).format('MMMM Do YYYY, h:mm:ss a')}</span>
-        </S.TimeContent>
-      )}
       <S.LabelsWrapper>
         {categories &&
           categories.length > 0 &&
@@ -46,8 +33,23 @@ const NewsCard = ({
             )
           })}
       </S.LabelsWrapper>
+      {!!created_at && (
+        <S.TimeContent>
+          <ClockIcon />
+          <span>{moment(created_at).format('MMMM Do YYYY, h:mm:ss a')}</span>
+        </S.TimeContent>
+      )}
+      {!!title && (
+        <S.ContentTitle
+          href={`/post/${encodeURIComponent(slug)}`}
+          size={highlight ? 'large' : 'normal'}
+        >
+          {title}
+        </S.ContentTitle>
+      )}
+      {!!lede && <S.LedeContent>{lede}</S.LedeContent>}
     </S.ContentWrapper>
   </S.Wrapper>
 )
 
-export default NewsCard
+export default ArticleCard
