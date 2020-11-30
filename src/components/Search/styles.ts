@@ -1,5 +1,7 @@
 import styled, { css } from 'styled-components'
+import { NavbarProps } from 'components/Navbar'
 import { rgba } from 'polished'
+import media from 'styled-media-query'
 
 type SearchOverlayProps = {
   visible?: boolean
@@ -7,7 +9,7 @@ type SearchOverlayProps = {
 
 type IconWrapperProps = {
   fixed?: boolean
-}
+} & NavbarProps
 
 const IconWrapperModifier = {
   fixed: () => css`
@@ -29,13 +31,18 @@ export const IconWrapper = styled.button<IconWrapperProps>`
   background: transparent;
   cursor: pointer;
   position: relative;
-  ${({ theme, fixed }) => css`
+  ${({ theme, fixed, variant }) => css`
     > svg {
       width: 100%;
       height: 100%;
       color: ${theme.colors.white};
     }
     ${fixed && IconWrapperModifier['fixed']};
+    ${media.greaterThan('medium')`
+      > svg {
+        color: ${variant ? theme.colors.secondary : theme.colors.white};
+      }
+    `}
   `}
 `
 

@@ -1,31 +1,38 @@
 import styled, { css } from 'styled-components'
 import media from 'styled-media-query'
 import { rgba } from 'polished'
+import { NavbarProps } from '.'
 
 type NavLinkProps = {
   dark?: boolean
-}
+} & NavbarProps
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div<NavbarProps>`
   display: flex;
   flex-direction: column;
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 14rem;
-  overflow-x: hidden;
-  ${({ theme }) => css`
+  overflow: hidden;
+  ${({ theme, variant }) => css`
     z-index: ${theme.layers.overlay};
+    height: ${variant ? '7rem' : '14rem'};
+  `}
+  ${media.lessThan('medium')`
+      height: 5rem;
   `}
   & [class^="Container"] {
     max-height: 100%;
   }
 `
-export const TopBar = styled.div`
+export const TopBar = styled.div<NavbarProps>`
   background: transparent;
   height: 7rem;
   width: 100%;
+  ${({ variant }) => css`
+    display: ${variant ? 'none' : 'block'};
+  `}
 `
 export const TopBarWrapper = styled.div`
   background: inherit;
@@ -36,10 +43,10 @@ export const TopBarWrapper = styled.div`
   width: 100%;
 `
 
-export const BottomBar = styled.div`
-  ${({ theme }) => css`
+export const BottomBar = styled.div<NavbarProps>`
+  ${({ theme, variant }) => css`
     position: relative;
-    background-color: ${theme.colors.primary};
+    background-color: ${variant ? theme.colors.white : theme.colors.primary};
     height: 7rem;
     width: 100vw;
     top: 7rem;
@@ -52,9 +59,9 @@ export const BottomBar = styled.div`
   `}
 `
 export const NavLink = styled.a<NavLinkProps>`
-  ${({ theme, dark }) => css`
+  ${({ theme, dark, variant }) => css`
     font-size: ${dark ? theme.font.sizes.large : theme.font.sizes.medium};
-    color: ${dark ? theme.colors.secondary : theme.colors.white};
+    color: ${dark || variant ? theme.colors.secondary : theme.colors.white};
     font-weight: bold;
     transition: color 0.3s ease-in-out;
     cursor: pointer;
@@ -67,12 +74,16 @@ export const NavLink = styled.a<NavLinkProps>`
 export const ContentWrapper = styled.div`
   ${({ theme }) => css`
     display: flex;
+    align-items: center;
     flex-grow: 1;
     > div > a {
       margin-right: ${theme.spacings.small};
     }
     > div > a:last-of-type {
       margin-right: 0;
+    }
+    > div:first-child > a {
+      margin-right: ${theme.spacings.small};
     }
   `}
 `
@@ -86,7 +97,7 @@ export const NavWrapper = styled.nav`
       height: 5rem;
     `}
 `
-export const IconWrapper = styled.button`
+export const IconWrapper = styled.button<NavbarProps>`
   width: 2.4rem;
   height: 2.4rem;
   border: none;

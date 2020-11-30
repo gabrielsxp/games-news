@@ -3,8 +3,9 @@ import { SearchAlt as SearchIcon } from '@styled-icons/boxicons-regular/SearchAl
 import { useState } from 'react'
 import { Container } from 'components/Container'
 import { Close as CloseIcon } from '@styled-icons/evaicons-solid/Close'
+import { NavbarProps } from 'components/Navbar'
 
-const Search = () => {
+const Search = ({ variant }: NavbarProps) => {
   const [isSearchOpened, setIsSearchOpened] = useState<boolean>(false)
 
   return (
@@ -23,7 +24,10 @@ const Search = () => {
           </S.IconWrapper>
         </Container>
       </S.SearchOverlay>
-      <S.IconWrapper onClick={() => setIsSearchOpened(!isSearchOpened)}>
+      <S.IconWrapper
+        variant={variant}
+        onClick={() => setIsSearchOpened(!isSearchOpened)}
+      >
         <SearchIcon aria-label="search icon" />
       </S.IconWrapper>
     </S.Wrapper>
