@@ -1,0 +1,22 @@
+query getPost($slug: String!){
+  posts(
+    where: {
+      slug: $slug
+    }
+  ) {
+    id
+    created_at
+    updated_at
+    title
+    lede
+    slug
+    body
+    categories {
+      name
+      color
+    }
+    image {
+      url
+    }
+  }
+}

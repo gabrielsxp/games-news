@@ -3,31 +3,13 @@ import Logo from 'components/Logo'
 import { SocialBannerProps } from 'components/SocialBanner'
 import SocialLink from 'components/SocialLink'
 import { Container } from 'components/Container'
+import { GetSocialsQuery } from 'generated/graphql'
 
-const socialLinks: SocialBannerProps[] = [
-  {
-    title: 'Facebook',
-    url: 'https://facebook.com',
-    color: '#2d4a86'
-  },
-  {
-    title: 'Twitter',
-    url: 'https://twitter.com',
-    color: '#1d9cd6'
-  },
-  {
-    title: 'Instagram',
-    url: 'https://instagram.com',
-    color: '#405DE6'
-  },
-  {
-    title: 'Google Plus',
-    url: 'https://google.com',
-    color: '#c44500'
-  }
-]
+type FooterProps = {
+  home?: GetSocialsQuery
+}
 
-const Footer = () => (
+const Footer = ({ home }: FooterProps) => (
   <S.Wrapper>
     <Container>
       <S.TopFooter>
@@ -48,9 +30,9 @@ const Footer = () => (
         <S.FooterSection>
           <S.Heading>Follow us on</S.Heading>
           <S.SocialContainer>
-            {socialLinks &&
-              socialLinks.map((socialLink, index) => {
-                return <SocialLink {...socialLink} key={index} />
+            {home?.home?.Social &&
+              home.home.Social.map((socialLink, index) => {
+                return socialLink && <SocialLink {...socialLink} key={index} />
               })}
           </S.SocialContainer>
         </S.FooterSection>

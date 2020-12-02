@@ -1,0 +1,9 @@
+query getSocials {
+  home {
+    Social {
+      title
+      url
+      color
+    }
+  }
+}

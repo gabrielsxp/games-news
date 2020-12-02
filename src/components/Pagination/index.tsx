@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as S from './styles'
 import { Stack, Button } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
@@ -5,13 +6,13 @@ import { useEffect, useState } from 'react'
 export type PaginationProps = {
   totalPages: number
   currentPage: number
-  callback?: () => void
+  fetchMore?: any
 }
 
 const Pagination = ({
   totalPages = 10,
-  currentPage = 8,
-  callback = () => ({})
+  currentPage = 1,
+  fetchMore = () => ({})
 }: PaginationProps) => {
   const [pages, setPages] = useState<number[]>([])
   useEffect(() => {
@@ -55,6 +56,14 @@ const Pagination = ({
                 colorScheme={currentPage === page ? 'red' : 'gray'}
                 variant={currentPage === page ? 'solid' : 'outline'}
                 key={index}
+                onClick={() =>
+                  fetchMore({
+                    variables: {
+                      offset: page,
+                      limit: 6
+                    }
+                  })
+                }
               >
                 {page}
               </Button>

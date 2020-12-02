@@ -1,94 +1,114 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as S from 'templates/PostTemplate/styles'
 import PostTemplate from 'templates/PostTemplate'
 import { Container } from 'components/Container'
 import SectionHeading from 'components/SectionHeading'
 import SideCard from 'components/SideCard'
-import SocialBanner, { SocialBannerProps } from 'components/SocialBanner'
-import mock from 'components/ArchiveCard/mock'
+import SocialBanner from 'components/SocialBanner'
 import ArchiveCard from 'components/ArchiveCard'
 import Header from 'components/Header'
-import { Input } from '@chakra-ui/react'
-import { Select } from '@chakra-ui/react'
 import { Button } from '@chakra-ui/react'
-import { ArchiveCardProps } from 'components/ArchiveCard'
-import Pagination from 'components/Pagination'
+import { Flex } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
+import {
+  useGetPostsQuery,
+  useGetSocialsQuery,
+  useBrowsePostsQuery
+} from 'generated/graphql'
+import withAPollo from 'utils/withApollo'
 
-const cards: ArchiveCardProps[] = Array.from(new Array(6)).reduce((acc) => {
-  acc = acc.concat(mock)
-  return acc
-}, [])
-
-const socialLinks: SocialBannerProps[] = [
-  {
-    title: 'Facebook',
-    url: 'https://facebook.com',
-    color: '#2d4a86'
-  },
-  {
-    title: 'Twitter',
-    url: 'https://twitter.com',
-    color: '#1d9cd6'
-  },
-  {
-    title: 'Instagram',
-    url: 'https://instagram.com',
-    color: '#405DE6'
-  },
-  {
-    title: 'Google Plus',
-    url: 'https://google.com',
-    color: '#c44500'
+const Post = () => {
+  const {
+    data: posts,
+    error: postsError,
+    loading: postsLoading,
+    fetchMore
+  } = useBrowsePostsQuery({
+    variables: {
+      limit: 6,
+      sort: 'created_at:DESC'
+    },
+    notifyOnNetworkStatusChange: true
+  })
+  const { data: home, error: homeError } = useGetSocialsQuery({
+    fetchPolicy: 'cache-first'
+  })
+  const { data: deals, error: dealsError } = useGetPostsQuery({
+    variables: {
+      limit: 6,
+      where: {
+        categories: {
+          name: 'DEALS'
+        }
+      },
+      sort: 'created_at:DESC'
+    },
+    fetchPolicy: 'no-cache'
+  })
+  if (postsError || homeError || dealsError) {
+    return <div>Error fetching posts</div>
   }
-]
+  if (postsLoading && !posts?.posts) {
+    return <div>Loading</div>
+  }
+  return (
+    <div>
+      <Header title="Browse all Posts" />
+      <PostTemplate>
+        <S.PostsContent>
+          <Container>
+            <S.MidSection>
+              <S.Section>
+                <S.PostsContainer>
+                  {posts?.posts &&
+                    posts?.posts.map((card, index) => {
+                      return card && <ArchiveCard {...card} key={index} />
+                    })}
+                </S.PostsContainer>
+                <Box mt={4} width="100%">
+                  <Flex justify="center">
+                    <Button
+                      mt={4}
+                      isLoading={postsLoading}
+                      colorScheme="red"
+                      onClick={() =>
+                        fetchMore({
+                          variables: {
+                            limit: 6,
+                            start: posts?.posts?.length
+                              ? (Math.ceil(posts.posts.length / 6) + 1) * 6
+                              : 0
+                          }
+                        })
+                      }
+                    >
+                      Load More Posts
+                    </Button>
+                  </Flex>
+                </Box>
+              </S.Section>
+              <S.Section>
+                <SectionHeading title="Most Viewed" />
+                <S.SideCardsContainer>
+                  {deals?.posts &&
+                    deals.posts.map((card, index) => {
+                      return card && <SideCard {...card} key={index} />
+                    })}
+                </S.SideCardsContainer>
+                <SectionHeading title="Follow us" />
+                <S.SocialBannersContainer>
+                  {home?.home?.Social &&
+                    home.home.Social.map((banner, index) => {
+                      return banner && <SocialBanner key={index} {...banner} />
+                    })}
+                </S.SocialBannersContainer>
+              </S.Section>
+            </S.MidSection>
+          </Container>
+        </S.PostsContent>
+      </PostTemplate>
+    </div>
+  )
+}
 
-const Post = () => (
-  <>
-    <Header title="Browse all Posts" />
-    <PostTemplate>
-      <S.PostsContent>
-        <Container>
-          <S.MidSection>
-            <S.Section>
-              <S.SearchInputsContainer>
-                <Input size="lg" placeholder="Text search" />
-                <Select size="lg" placeholder="Type of post">
-                  <option value="option1">All</option>
-                  <option value="option2">Article</option>
-                  <option value="option3">News</option>
-                </Select>
-                <Button size="lg" colorScheme="blue">
-                  Search
-                </Button>
-              </S.SearchInputsContainer>
-              <S.PostsContainer>
-                {cards &&
-                  cards.map((card, index) => {
-                    return <ArchiveCard {...card} key={index} />
-                  })}
-              </S.PostsContainer>
-              <Pagination></Pagination>
-            </S.Section>
-            <S.Section>
-              <SectionHeading title="Most Viewed" />
-              <S.SideCardsContainer>
-                {cards &&
-                  cards.map((card, index) => {
-                    return <SideCard {...card} key={index} />
-                  })}
-              </S.SideCardsContainer>
-              <SectionHeading title="Follow us" />
-              <S.SocialBannersContainer>
-                {socialLinks &&
-                  socialLinks.map((banner, index) => {
-                    return <SocialBanner key={index} {...banner} />
-                  })}
-              </S.SocialBannersContainer>
-            </S.Section>
-          </S.MidSection>
-        </Container>
-      </S.PostsContent>
-    </PostTemplate>
-  </>
-)
-
-export default Post
+export default withAPollo({ ssr: true })(Post)

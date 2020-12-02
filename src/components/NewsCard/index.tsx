@@ -1,10 +1,12 @@
 import * as S from './styles'
-import mock from './mock'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { ClockOutline as ClockIcon } from '@styled-icons/evaicons-outline/ClockOutline'
 import moment from 'moment'
-
-export type NewsCardProps = typeof mock & { highlight?: boolean }
+import { Post } from 'generated/graphql'
+export type NewsCardProps = Pick<
+  Post,
+  'slug' | 'title' | 'categories' | 'created_at' | 'image'
+> & { highlight?: boolean }
 
 const NewsCard = ({
   slug,
@@ -15,7 +17,7 @@ const NewsCard = ({
   highlight = false
 }: NewsCardProps) => (
   <S.Wrapper>
-    {image && !!image.url && (
+    {image && image.url && (
       <LazyLoadImage alt={title} src={image.url}></LazyLoadImage>
     )}
     <S.ContentWrapper>
@@ -38,7 +40,9 @@ const NewsCard = ({
           categories.length > 0 &&
           categories.map((cat, index) => {
             return (
-              !!cat.name && (
+              cat &&
+              cat!.name &&
+              cat!.color && (
                 <S.Label aria-label="tag" key={index} color={cat.color}>
                   {cat.name}
                 </S.Label>

@@ -17,7 +17,7 @@ export const Wrapper = styled.div`
       height: 3rem;
       background-color: ${theme.colors.primary};
       clip-path: polygon(100% 0, 0 0, 50% 50%);
-      bottom: -3rem;
+      bottom: -2.8rem;
     }
   `}
 `

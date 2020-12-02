@@ -5,7 +5,7 @@ import { Instagram as InstagramIcon } from '@styled-icons/fa-brands/Instagram'
 import { GooglePlusG as GooglePlusIcon } from '@styled-icons/fa-brands/GooglePlusG'
 
 export type SocialBannerProps = {
-  title: 'Facebook' | 'Twitter' | 'Instagram' | 'Google Plus'
+  title: string
   url: string
   color: string
 }

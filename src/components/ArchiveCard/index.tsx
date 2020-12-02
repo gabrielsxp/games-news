@@ -1,10 +1,10 @@
 import * as S from './styles'
-import mock from './mock'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { ClockOutline as ClockIcon } from '@styled-icons/evaicons-outline/ClockOutline'
 import moment from 'moment'
+import { PostBodyFragment } from 'generated/graphql'
 
-export type ArchiveCardProps = typeof mock & { highlight?: boolean }
+export type ArchiveCardProps = PostBodyFragment & { highlight?: boolean }
 
 const ArchiveCard = ({
   slug,
@@ -25,7 +25,8 @@ const ArchiveCard = ({
           categories.length > 0 &&
           categories.map((cat, index) => {
             return (
-              !!cat.name && (
+              !!cat?.name &&
+              !!cat?.color && (
                 <S.Label aria-label="tag" key={index} color={cat.color}>
                   {cat.name}
                 </S.Label>

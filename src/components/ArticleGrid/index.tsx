@@ -1,8 +1,9 @@
 import * as S from './styles'
 import ArticleCard from 'components/ArticleCard'
 import MediaMatch from 'components/MediaMatch'
-import { ArticleCardProps } from 'components/ArticleCard'
 import SideCard from 'components/SideCard'
+import { PostBodyFragment } from 'generated/graphql'
+export type ArticleCardProps = PostBodyFragment & { highlight?: boolean }
 
 export type ArticleGridProps = {
   cards?: ArticleCardProps[]

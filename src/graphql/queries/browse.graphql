@@ -1,0 +1,26 @@
+fragment postBody on Post {
+  id
+  created_at
+  updated_at
+  title
+  lede
+  slug
+  categories {
+    name
+    color
+  }
+  image {
+    url
+  }
+}
+
+query browsePosts($sort: String, $limit: Int, $start: Int, $where: JSON){
+  posts(
+    sort: $sort
+    limit: $limit
+    start: $start
+    where: $where
+  ) {
+    ...postBody
+  }
+}

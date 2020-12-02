@@ -1,70 +1,123 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Hero from 'components/Hero'
 import HeroGrid from 'components/HeroGrid'
 import ArticleGrid from 'components/ArticleGrid'
-import mock from 'components/NewsCard/mock'
-import articleMock from 'components/ArticleCard/mock'
-import { NewsCardProps } from 'components/NewsCard'
-import { ArticleCardProps } from 'components/ArticleCard'
 import HomeTemplate from 'templates/HomeTemplate'
 import { Container } from 'components/Container'
 import SectionHeading from 'components/SectionHeading'
 import * as S from 'templates/HomeTemplate/styles'
-import SocialBanner, { SocialBannerProps } from 'components/SocialBanner'
+import SocialBanner from 'components/SocialBanner'
 import SideCard from 'components/SideCard'
+import withApollo from 'utils/withApollo'
+import { Post, useGetPostsQuery, useGetSocialsQuery } from 'generated/graphql'
 
-const cards: NewsCardProps[] = Array.from(new Array(5)).reduce((acc) => {
-  acc = acc.concat(mock)
-  return acc
-}, [])
-const articles: ArticleCardProps[] = Array.from(new Array(6)).reduce((acc) => {
-  acc = acc.concat(articleMock)
-  return acc
-}, [])
+const Home = () => {
+  const {
+    data: home,
+    error: homeError,
+    loading: homeLoading
+  } = useGetSocialsQuery()
 
-type HomeProps = {
-  socialLinks?: SocialBannerProps[]
-}
-
-export default function Home() {
-  const socialLinks: SocialBannerProps[] = [
-    {
-      title: 'Facebook',
-      url: 'https://facebook.com',
-      color: '#2d4a86'
+  const {
+    data: topCards,
+    error: topCardsError,
+    loading: topCardsLoading
+  } = useGetPostsQuery({
+    variables: {
+      limit: 5,
+      where: {
+        categories: {
+          name: 'STANDARD NEWS'
+        }
+      },
+      sort: 'created_at:DESC'
     },
-    {
-      title: 'Twitter',
-      url: 'https://twitter.com',
-      color: '#1d9cd6'
+    fetchPolicy: 'no-cache'
+  })
+  const {
+    data: news,
+    error: newsError,
+    loading: newsLoading
+  } = useGetPostsQuery({
+    variables: {
+      limit: 5,
+      start: 5,
+      where: {
+        categories: {
+          name: 'GAMES'
+        }
+      },
+      sort: 'created_at:DESC'
     },
-    {
-      title: 'Instagram',
-      url: 'https://instagram.com',
-      color: '#405DE6'
-    },
-    {
-      title: 'Google Plus',
-      url: 'https://google.com',
-      color: '#c44500'
+    fetchPolicy: 'no-cache'
+  })
+  const {
+    data: articles,
+    error: articlesError,
+    loading: articlesLoading
+  } = useGetPostsQuery({
+    variables: {
+      limit: 6,
+      where: {
+        categories: {
+          name: 'DEALS'
+        }
+      },
+      sort: 'created_at:DESC'
     }
-  ]
-  return (
+  })
+  const {
+    data: dataSide,
+    error: sideError,
+    loading: sideLoading
+  } = useGetPostsQuery({
+    variables: {
+      limit: 5,
+      where: {
+        categories: {
+          name: 'GAMES'
+        }
+      },
+      sort: 'created_at:DESC'
+    },
+    fetchPolicy: 'no-cache'
+  })
+
+  const hasAnyErrors =
+    topCardsError || newsError || articlesError || sideError || homeError
+  const hasAnythingLoading =
+    topCardsLoading ||
+    newsLoading ||
+    articlesLoading ||
+    sideLoading ||
+    homeLoading
+
+  return hasAnythingLoading ? (
+    <div>loading</div>
+  ) : hasAnyErrors ? (
+    <div>There something wrong on fetching data</div>
+  ) : (
     <HomeTemplate>
       <Hero>
-        <HeroGrid cards={cards} />
+        {topCards && topCards.posts && (
+          <HeroGrid cards={topCards.posts as Post[]} />
+        )}
       </Hero>
       <Container>
         <S.MidSection>
           <S.Section>
-            <SectionHeading title="Latest News" />
-            <HeroGrid reduced cards={cards} />
+            <SectionHeading title="Game News" />
+            {news && news.posts && (
+              <HeroGrid reduced cards={news.posts as Post[]} />
+            )}
           </S.Section>
           <S.Section>
             <SectionHeading title="Most Viewed" />
             <S.SideCardsContainer>
-              {cards &&
-                cards.map((card, index) => {
-                  return <SideCard {...card} key={index} />
+              {dataSide &&
+                dataSide.posts &&
+                dataSide.posts.map((card, index) => {
+                  return card && <SideCard key={index} {...card} />
                 })}
             </S.SideCardsContainer>
           </S.Section>
@@ -73,16 +126,17 @@ export default function Home() {
       <Container>
         <S.MidSection>
           <S.Section>
-            <SectionHeading title="Latest Articles" />
-            <ArticleGrid reduced cards={articles} />
+            <SectionHeading title="Best Deals" />
+            {articles?.posts && (
+              <ArticleGrid reduced cards={articles.posts as Post[]} />
+            )}
           </S.Section>
           <S.Section>
             <SectionHeading title="Follow us" />
             <S.SocialBannersContainer>
-              {socialLinks &&
-                socialLinks.map((banner, index) => {
-                  return <SocialBanner key={index} {...banner} />
-                })}
+              {home?.home?.Social?.map((banner, index) => {
+                return banner && <SocialBanner key={index} {...banner} />
+              })}
             </S.SocialBannersContainer>
           </S.Section>
         </S.MidSection>
@@ -90,3 +144,7 @@ export default function Home() {
     </HomeTemplate>
   )
 }
+
+export default withApollo({
+  ssr: true
+})(Home)

@@ -65,3 +65,34 @@ export const SearchOverlay = styled.div<SearchOverlayProps>`
     height: 100%;
   }
 `
+export const SearchInputsContainer = styled.div`
+  ${({ theme }) => css`
+    display: grid;
+    padding-top: ${theme.spacings.xxlarge};
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: ${theme.grid.gutter};
+    margin-bottom: ${theme.spacings.small};
+    ${media.greaterThan('medium')`
+      grid-template-columns: 90% 10%;
+    `}
+  `}
+`
+
+export const PostsContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  height: 80%;
+  overflow-y: auto;
+  align-content: flex-start;
+  grid-gap: 1rem;
+  ${media.greaterThan('medium')`
+    grid-template-columns: repeat(3, 1fr);
+  `}
+`
+export const NoResults = styled.h2`
+  ${({ theme }) => css`
+    font-size: ${theme.font.sizes.large};
+    color: ${theme.colors.white};
+    font-weight: bold;
+  `}
+`

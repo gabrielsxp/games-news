@@ -23,8 +23,9 @@ export const Section = styled.section`
   ${({ theme }) => css`
     padding: ${theme.spacings.medium} 0;
     > img {
-      width: 94rem;
-      width: 52rem;
+      max-width: 100%;
+      height: auto;
+      width: 100%;
       margin-bottom: ${theme.spacings.xxsmall};
     }
   `}
@@ -182,6 +183,7 @@ export const RelatedContainer = styled.div`
     ${media.greaterThan('medium')`
     grid-template-columns: repeat(3, 1fr);
     `}
+    margin-bottom: ${theme.spacings.medium};
   `}
 `
 export const PostsContainer = styled.div`
@@ -195,13 +197,5 @@ export const PostsContainer = styled.div`
       height: 40rem;
     }
   `};
-  `}
-`
-export const SearchInputsContainer = styled.div`
-  ${({ theme }) => css`
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: ${theme.grid.gutter};
-    margin-bottom: ${theme.spacings.small};
   `}
 `
