@@ -3,7 +3,7 @@ import { ApolloClient, InMemoryCache } from '@apollo/client'
 import { Post } from 'generated/graphql'
 
 const apolloClient = new ApolloClient({
-  uri: 'http://localhost:1337/graphql',
+  uri: process.env.GRAPHQL_URL,
   cache: new InMemoryCache({
     typePolicies: {
       Query: {

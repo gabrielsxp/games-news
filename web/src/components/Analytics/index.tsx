@@ -1,6 +1,6 @@
 import React from 'react'
 
-const UAANALYTICS = 'UA-XXXXXXXXX-X'
+const UAANALYTICS = process.env.ANALYTICS_UA
 
 const Analytics = () => (
   <>

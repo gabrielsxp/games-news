@@ -93,7 +93,7 @@ const Post = () => {
     postLoading || newsLoading || homeLoading || relatedLoading
   const post = postData?.posts ? postData.posts[0] : null
 
-  const baseUrl = 'http://localhost:3000/post/'
+  const baseUrl = `${process.env.HOST}/post/`
 
   return hasAnythingLoading ? (
     <Loading />
@@ -123,9 +123,9 @@ const Post = () => {
       </Head>
       <NextSeo>
         title={post?.title} description={post?.lede} canonical=
-        {`https://localhost:3000/post/${post?.slug}`} openGraph=
+        {`${process.env.HOST}/post/${post?.slug}`} openGraph=
         {{
-          url: `https://localhost:3000/post/${post?.slug}`,
+          url: `${process.env.HOST}/post/${post?.slug}`,
           title: `Game News - ${post?.title}`,
           description: post?.lede,
           images: [{ url: post?.image?.url }],
@@ -197,7 +197,7 @@ const Post = () => {
                     url: baseUrl + post?.slug,
                     identifier: post?.id,
                     title: post?.title,
-                    language: 'en_US' //e.g. for Traditional Chinese (Taiwan)
+                    language: 'en_US'
                   }}
                 />
               </S.Section>
