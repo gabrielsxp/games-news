@@ -4,7 +4,7 @@ A project created using Typescript + GraphQL on front-end and Node with Strapi +
 The main porpouse of this project is to create posts on the server and display it on front-end.
 
 <p align="center">
-    <img src="https://github.com/gabrielsxp/games-news/edit/master/gif.gif" alt="Pay me Dude Landing"></img> 
+    <img src="https://github.com/gabrielsxp/games-news/blob/master/gif.gif" alt="Pay me Dude Landing"></img> 
 </p>
 
 ## Features
