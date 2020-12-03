@@ -15,6 +15,39 @@ The main porpouse of this project is to create posts on the server and display i
 - Side sections with latest posts
 - Newsletter [Under constuction]
 
+## Installation
+
+```bash
+yarn install
+```
+
+## Usage
+
+Configure the Strapi variables on .env file on the root of the server folder
+
+```bash
+GAMESPOT_KEY=xxx
+GAMESPOT_URL=xxx
+CLOUDINARY_NAME=xxx
+CLOUDINARY_KEY=Xxx
+CLOUDINARY_SECRET=xxx
+```
+
+```bash
+yarn develop
+```
+
+To run this project on development mode.
+
+To run it on production, execute
+
+```bash
+yarn build
+yarn start
+```
+
+## Cloudinary
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
