@@ -2,6 +2,10 @@
 
 A project created using Typescript + GraphQL to show posts from server
 
+<p align="center">
+    <img src="https://github.com/gabrielsxp/games-news/blob/master/gif.gif" alt="Pay me Dude Landing"></img> 
+</p>
+
 ## Installation
 
 Execute either
