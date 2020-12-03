@@ -126,11 +126,12 @@ export const MobileMenu = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  transform: translateY(-100%);
   ${({ theme }) => css`
     background-color: ${theme.colors.white};
   `}
   &.display-mobile-menu {
-    transform: translateY(-100%);
+    transform: translateY(0%);
     opacity: 1;
   }
 `

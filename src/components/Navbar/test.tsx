@@ -8,8 +8,7 @@ describe('<Navbar />', () => {
     renderWithTheme(<Navbar />)
 
     expect(screen.getAllByText(/home/i)).toHaveLength(2)
-    expect(screen.getAllByText(/latest news/i)).toHaveLength(2)
-    expect(screen.getAllByText(/latest articles/i)).toHaveLength(2)
+    expect(screen.getAllByText(/browse posts/i)).toHaveLength(2)
     expect(screen.getAllByAltText(/Image of a console joystick/i)).toHaveLength(
       2
     )

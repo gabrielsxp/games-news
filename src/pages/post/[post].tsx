@@ -11,6 +11,8 @@ import { DiscussionEmbed } from 'disqus-react'
 import withApollo from 'utils/withApollo'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import moment from 'moment'
+import Loading from 'components/Loading'
+import Error from 'components/Error'
 import { Post as PostProps } from 'generated/graphql'
 import {
   useGetPostQuery,
@@ -83,17 +85,17 @@ const Post = () => {
     loading: homeLoading
   } = useGetSocialsQuery()
 
+  const hasAnyErrors = postError || newsError || homeError || relatedError
+  const hasAnythingLoading =
+    postLoading || newsLoading || homeLoading || relatedLoading
   const post = postData?.posts ? postData.posts[0] : null
 
   const baseUrl = 'http://localhost:3000/post/'
 
-  const hasAnyErrors = postError || newsError || homeError || relatedError
-  const hasAnythingLoading =
-    postLoading || newsLoading || homeLoading || relatedLoading
   return hasAnythingLoading ? (
-    <div>Loading...</div>
+    <Loading />
   ) : hasAnyErrors ? (
-    <div>Something went wrong while fetching post</div>
+    <Error />
   ) : (
     <PostTemplate>
       <S.PostContent>
@@ -102,6 +104,7 @@ const Post = () => {
             <S.Section>
               <LazyLoadImage src={post?.image?.url} alt={post?.title} />
               <S.ContentTitle>{post?.title}</S.ContentTitle>
+              <S.ContentLede>{post?.lede}</S.ContentLede>
               <S.MetaWrapper>
                 <S.AuthorInfoWrapper>
                   <S.TimeContent>

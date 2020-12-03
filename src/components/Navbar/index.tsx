@@ -7,6 +7,7 @@ import { MenuAltRight } from '@styled-icons/boxicons-regular/MenuAltRight'
 import { useState, useEffect } from 'react'
 import useScrollPosition from '@react-hook/window-scroll'
 import { useWindowSize } from 'utils/helpers'
+import Link from 'next/link'
 
 export type NavbarProps = {
   variant?: boolean
@@ -61,15 +62,16 @@ const Navbar = ({ variant = false }: NavbarProps) => {
           className={isMobileMenuOpen ? 'display-mobile-menu' : ''}
         >
           <S.MobileMenuWrapper>
-            <S.NavLink aria-hidden={isMobileMenuOpen} dark>
-              Home
-            </S.NavLink>
-            <S.NavLink aria-hidden={isMobileMenuOpen} dark>
-              Latest News
-            </S.NavLink>
-            <S.NavLink aria-hidden={isMobileMenuOpen} dark>
-              Latest Articles
-            </S.NavLink>
+            <Link href="/" passHref>
+              <S.NavLink aria-hidden={isMobileMenuOpen} dark>
+                Home
+              </S.NavLink>
+            </Link>
+            <Link href="/posts" passHref>
+              <S.NavLink aria-hidden={isMobileMenuOpen} dark>
+                Browse Posts
+              </S.NavLink>
+            </Link>
           </S.MobileMenuWrapper>
         </S.MobileMenu>
       </MediaMatch>
@@ -99,9 +101,12 @@ const Navbar = ({ variant = false }: NavbarProps) => {
                 {variant && <Logo />}
               </MediaMatch>
               <MediaMatch greaterThan="medium">
-                <S.NavLink variant={variant}>Home</S.NavLink>
-                <S.NavLink variant={variant}>Latest News</S.NavLink>
-                <S.NavLink variant={variant}>Latest Articles</S.NavLink>
+                <Link href="/" passHref>
+                  <S.NavLink variant={variant}>Home</S.NavLink>
+                </Link>
+                <Link href="/posts" passHref>
+                  <S.NavLink variant={variant}>Browse Posts</S.NavLink>
+                </Link>
               </MediaMatch>
               <MediaMatch lessThan="medium">
                 <Logo />

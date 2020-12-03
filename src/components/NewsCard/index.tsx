@@ -2,6 +2,7 @@ import * as S from './styles'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { ClockOutline as ClockIcon } from '@styled-icons/evaicons-outline/ClockOutline'
 import moment from 'moment'
+import Link from 'next/link'
 import { Post } from 'generated/graphql'
 export type NewsCardProps = Pick<
   Post,
@@ -18,16 +19,18 @@ const NewsCard = ({
 }: NewsCardProps) => (
   <S.Wrapper>
     {image && image.url && (
-      <LazyLoadImage alt={title} src={image.url}></LazyLoadImage>
+      <LazyLoadImage
+        alt={title}
+        src={image.url ?? '/img/placeholder.jpg'}
+      ></LazyLoadImage>
     )}
     <S.ContentWrapper>
       {!!title && (
-        <S.ContentTitle
-          href={`/post/${encodeURIComponent(slug)}`}
-          size={highlight ? 'large' : 'normal'}
-        >
-          {title}
-        </S.ContentTitle>
+        <Link href={`/post/${encodeURIComponent(slug)}`} passHref>
+          <S.ContentTitle size={highlight ? 'large' : 'normal'}>
+            {title}
+          </S.ContentTitle>
+        </Link>
       )}
       {!!created_at && (
         <S.TimeContent>

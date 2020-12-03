@@ -3,6 +3,8 @@ import Navbar from 'components/Navbar'
 import Footer from 'components/Footer'
 import { useGetSocialsQuery } from 'generated/graphql'
 import withApollo from 'utils/withApollo'
+import Loading from 'components/Loading'
+import Error from 'components/Error'
 
 export type HomeTemplateProps = {
   children?: React.ReactNodeArray | React.ReactNode
@@ -16,11 +18,11 @@ const HomeTemplate = ({ children }: HomeTemplateProps) => {
   } = useGetSocialsQuery()
 
   if (homeLoading) {
-    return <div>loading</div>
+    return <Loading />
   }
 
   if (homeError) {
-    return <div>error</div>
+    return <Error />
   }
 
   return (

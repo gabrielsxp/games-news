@@ -3,6 +3,8 @@ import Navbar from 'components/Navbar'
 import Footer from 'components/Footer'
 import { useGetSocialsQuery } from 'generated/graphql'
 import withApollo from 'utils/withApollo'
+import Loading from 'components/Loading'
+import Error from 'components/Error'
 
 export type PostTemplateProps = {
   children?: React.ReactNodeArray | React.ReactNode
@@ -16,11 +18,11 @@ const PostTemplate = ({ children }: PostTemplateProps) => {
   } = useGetSocialsQuery()
 
   if (homeError) {
-    return <div>error to fetch social links</div>
+    return <Error />
   }
 
   if (homeLoading) {
-    return <div>loading</div>
+    return <Loading />
   }
 
   return (

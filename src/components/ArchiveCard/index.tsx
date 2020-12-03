@@ -3,6 +3,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { ClockOutline as ClockIcon } from '@styled-icons/evaicons-outline/ClockOutline'
 import moment from 'moment'
 import { PostBodyFragment } from 'generated/graphql'
+import Link from 'next/link'
 
 export type ArchiveCardProps = PostBodyFragment & { highlight?: boolean }
 
@@ -17,7 +18,10 @@ const ArchiveCard = ({
 }: ArchiveCardProps) => (
   <S.Wrapper>
     {image && !!image.url && (
-      <LazyLoadImage alt={title} src={image.url}></LazyLoadImage>
+      <LazyLoadImage
+        alt={title}
+        src={image.url ?? '/img/placeholder.jpg'}
+      ></LazyLoadImage>
     )}
     <S.ContentWrapper>
       <S.LabelsWrapper>
@@ -41,12 +45,11 @@ const ArchiveCard = ({
         </S.TimeContent>
       )}
       {!!title && (
-        <S.ContentTitle
-          href={`/post/${encodeURIComponent(slug)}`}
-          size={highlight ? 'large' : 'normal'}
-        >
-          {title}
-        </S.ContentTitle>
+        <Link href={`/post/${encodeURIComponent(slug)}`} passHref>
+          <S.ContentTitle size={highlight ? 'large' : 'normal'}>
+            {title}
+          </S.ContentTitle>
+        </Link>
       )}
       {!!lede && <S.LedeContent>{lede}</S.LedeContent>}
     </S.ContentWrapper>

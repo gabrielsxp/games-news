@@ -3,6 +3,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { ClockOutline as ClockIcon } from '@styled-icons/evaicons-outline/ClockOutline'
 import moment from 'moment'
 import { PostBodyFragment } from 'generated/graphql'
+import Link from 'next/link'
 
 export type ArticleCardProps = PostBodyFragment & { highlight?: boolean }
 
@@ -17,7 +18,10 @@ const ArticleCard = ({
 }: ArticleCardProps) => (
   <S.Wrapper highlight={highlight}>
     {image && !!image.url && (
-      <LazyLoadImage alt={title} src={image.url}></LazyLoadImage>
+      <LazyLoadImage
+        alt={title}
+        src={image.url ?? '/img/placeholder.jpg'}
+      ></LazyLoadImage>
     )}
     <S.ContentWrapper>
       {!!created_at && (
@@ -27,12 +31,11 @@ const ArticleCard = ({
         </S.TimeContent>
       )}
       {!!title && (
-        <S.ContentTitle
-          href={`/post/${encodeURIComponent(slug)}`}
-          size={highlight ? 'large' : 'normal'}
-        >
-          {title}
-        </S.ContentTitle>
+        <Link href={`/post/${encodeURIComponent(slug)}`} passHref>
+          <S.ContentTitle size={highlight ? 'large' : 'normal'}>
+            {title}
+          </S.ContentTitle>
+        </Link>
       )}
       {highlight && !!lede && <S.LedeContent>{lede}</S.LedeContent>}
       <S.LabelsWrapper>

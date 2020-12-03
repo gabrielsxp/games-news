@@ -4,6 +4,7 @@ import { SocialBannerProps } from 'components/SocialBanner'
 import SocialLink from 'components/SocialLink'
 import { Container } from 'components/Container'
 import { GetSocialsQuery } from 'generated/graphql'
+import Link from 'next/link'
 
 type FooterProps = {
   home?: GetSocialsQuery
@@ -15,8 +16,9 @@ const Footer = ({ home }: FooterProps) => (
       <S.TopFooter>
         <S.FooterSection>
           <S.Heading>Links</S.Heading>
-          <S.FooterLink href="/news">Latest News</S.FooterLink>
-          <S.FooterLink href="/articles">Latest Articles</S.FooterLink>
+          <Link href="/posts" passHref>
+            <S.FooterLink href="/news">Browse Posts</S.FooterLink>
+          </Link>
         </S.FooterSection>
         <S.FooterSection>
           <S.LogoWrapper>

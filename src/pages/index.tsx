@@ -9,6 +9,8 @@ import * as S from 'templates/HomeTemplate/styles'
 import SocialBanner from 'components/SocialBanner'
 import SideCard from 'components/SideCard'
 import withApollo from 'utils/withApollo'
+import Error from 'components/Error'
+import Loading from 'components/Loading'
 import { Post, useGetPostsQuery, useGetSocialsQuery } from 'generated/graphql'
 
 const Home = () => {
@@ -93,9 +95,9 @@ const Home = () => {
     homeLoading
 
   return hasAnythingLoading ? (
-    <div>loading</div>
+    <Loading />
   ) : hasAnyErrors ? (
-    <div>There something wrong on fetching data</div>
+    <Error />
   ) : (
     <HomeTemplate>
       <Hero>

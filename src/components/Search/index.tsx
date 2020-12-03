@@ -86,4 +86,4 @@ const Search = ({ variant }: NavbarProps) => {
   )
 }
 
-export default withApollo({ ssr: true })(Search)
+export default withApollo({ ssr: false })(Search)

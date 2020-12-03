@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 import media from 'styled-media-query'
-import { rgba } from 'polished'
+import { rgba, lighten } from 'polished'
 
 export const Wrapper = styled.main``
 
@@ -76,9 +76,18 @@ export const ContentTitle = styled.h1`
   ${({ theme }) => css`
     color: ${theme.colors.secondary};
     font-weight: bold;
-    margin-bottom: ${theme.spacings.small};
+    margin-bottom: ${theme.spacings.xxsmall};
     text-decoration: none;
     font-size: ${theme.font.sizes.xxlarge};
+  `}
+`
+
+export const ContentLede = styled.h2`
+  ${({ theme }) => css`
+    color: ${lighten(0.2, theme.colors.secondary)};
+    margin-bottom: ${theme.spacings.small};
+    text-decoration: none;
+    font-size: ${theme.font.sizes.large};
   `}
 `
 
@@ -150,6 +159,7 @@ export const Line = styled.hr`
 `
 export const BodyWrapper = styled.div`
   position: relative;
+  overflow: hidden;
   ${({ theme }) => css`
     font-family: ${theme.font.family};
     font-size: ${theme.font.sizes.small};
@@ -166,12 +176,25 @@ export const BodyWrapper = styled.div`
       }
     }
     img {
-      max-width: 100%;
+      max-width: 1000px;
       margin: ${theme.spacings.xsmall} 0;
+    }
+    a {
+      max-width: 100%;
     }
     li {
       margin: ${theme.spacings.xxsmall} 0;
     }
+    iframe {
+      width: 100%;
+      min-height: 40rem;
+    }
+
+    ${media.lessThan('medium')`
+      img {
+        max-width: 100%;
+      }
+    `}
   `}
 `
 export const RelatedContainer = styled.div`
