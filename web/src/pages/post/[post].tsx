@@ -35,6 +35,9 @@ import {
   WhatsappIcon
 } from 'react-share'
 import { useRouter } from 'next/router'
+import React from 'react'
+import Head from 'next/head'
+import { NextSeo } from 'next-seo'
 
 const Post = () => {
   const router = useRouter()
@@ -97,94 +100,128 @@ const Post = () => {
   ) : hasAnyErrors ? (
     <Error />
   ) : (
-    <PostTemplate>
-      <S.PostContent>
-        <Container>
-          <S.MidSection>
-            <S.Section>
-              <LazyLoadImage src={post?.image?.url} alt={post?.title} />
-              <S.ContentTitle>{post?.title}</S.ContentTitle>
-              <S.ContentLede>{post?.lede}</S.ContentLede>
-              <S.MetaWrapper>
-                <S.AuthorInfoWrapper>
-                  <S.TimeContent>
-                    <ClockIcon />
-                    <span>
-                      {moment(post?.created_at).format(
-                        'MMMM Do YYYY, h:mm:ss a'
-                      )}
-                    </span>
-                  </S.TimeContent>
-                  <S.AuthorWrapper>
-                    <AuthorIcon />
-                    Post by: <span>Admin</span>
-                  </S.AuthorWrapper>
-                </S.AuthorInfoWrapper>
-                <S.ShareWrapper>
-                  <span>Share:</span>
-                  <EmailShareButton url={baseUrl + post?.slug}>
-                    <EmailIcon size={24} borderRadius={5} />
-                  </EmailShareButton>
-                  <FacebookShareButton url={baseUrl + post?.slug}>
-                    <FacebookIcon size={24} borderRadius={5} />
-                  </FacebookShareButton>
-                  <TwitterShareButton url={baseUrl + post?.slug}>
-                    <TwitterIcon size={24} borderRadius={5} />
-                  </TwitterShareButton>
-                  <WhatsappShareButton url={baseUrl + post?.slug}>
-                    <WhatsappIcon size={24} borderRadius={5} />
-                  </WhatsappShareButton>
-                  <RedditShareButton url={baseUrl + post?.slug}>
-                    <RedditIcon size={24} borderRadius={5} />
-                  </RedditShareButton>
-                  <InstapaperShareButton url={baseUrl + post?.slug}>
-                    <InstapaperIcon size={24} borderRadius={5} />
-                  </InstapaperShareButton>
-                </S.ShareWrapper>
-              </S.MetaWrapper>
-              <S.Line />
-              <S.BodyWrapper
-                dangerouslySetInnerHTML={{ __html: post?.body ?? '' }}
-              ></S.BodyWrapper>
-              <S.Line />
-              <SectionHeading title="You can also like" />
-              <S.RelatedContainer>
-                {related?.posts?.map((card, index) => {
-                  return (
-                    card && <NewsCard key={index} {...(card as PostProps)} />
-                  )
-                })}
-              </S.RelatedContainer>
-              <DiscussionEmbed
-                shortname="games-news-2"
-                config={{
-                  url: baseUrl + post?.slug,
-                  identifier: post?.id,
-                  title: post?.title,
-                  language: 'en_US' //e.g. for Traditional Chinese (Taiwan)
-                }}
-              />
-            </S.Section>
-            <S.Section>
-              <SectionHeading title="Most Viewed" />
-              <S.SideCardsContainer>
-                {news?.posts &&
-                  news?.posts?.map((card, index) => {
-                    return card && <SideCard {...card} key={index} />
+    <>
+      <Head>
+        <title>Game News - {post?.title}</title>
+        <meta name="description" content={`${post?.lede}`} />
+        <link
+          rel="shortcut icon"
+          href={
+            post?.image?.url
+              ? post.image.url.replace('http://', 'https://')
+              : post?.title
+          }
+        />
+        <link
+          rel="apple-touch-icon"
+          href={
+            post?.image?.url
+              ? post.image.url.replace('http://', 'https://')
+              : post?.title
+          }
+        />
+      </Head>
+      <NextSeo>
+        title={post?.title} description={post?.lede} canonical=
+        {`https://localhost:3000/post/${post?.slug}`} openGraph=
+        {{
+          url: `https://localhost:3000/post/${post?.slug}`,
+          title: `Game News - ${post?.title}`,
+          description: post?.lede,
+          images: [{ url: post?.image?.url }],
+          site_name: `Game News`,
+          locale: 'en_US'
+        }}
+      </NextSeo>
+      <PostTemplate>
+        <S.PostContent>
+          <Container>
+            <S.MidSection>
+              <S.Section>
+                <LazyLoadImage src={post?.image?.url} alt={post?.title} />
+                <S.ContentTitle>{post?.title}</S.ContentTitle>
+                <S.ContentLede>{post?.lede}</S.ContentLede>
+                <S.MetaWrapper>
+                  <S.AuthorInfoWrapper>
+                    <S.TimeContent>
+                      <ClockIcon />
+                      <span>
+                        {moment(post?.created_at).format(
+                          'MMMM Do YYYY, h:mm:ss a'
+                        )}
+                      </span>
+                    </S.TimeContent>
+                    <S.AuthorWrapper>
+                      <AuthorIcon />
+                      Post by: <span>Admin</span>
+                    </S.AuthorWrapper>
+                  </S.AuthorInfoWrapper>
+                  <S.ShareWrapper>
+                    <span>Share:</span>
+                    <EmailShareButton url={baseUrl + post?.slug}>
+                      <EmailIcon size={24} borderRadius={5} />
+                    </EmailShareButton>
+                    <FacebookShareButton url={baseUrl + post?.slug}>
+                      <FacebookIcon size={24} borderRadius={5} />
+                    </FacebookShareButton>
+                    <TwitterShareButton url={baseUrl + post?.slug}>
+                      <TwitterIcon size={24} borderRadius={5} />
+                    </TwitterShareButton>
+                    <WhatsappShareButton url={baseUrl + post?.slug}>
+                      <WhatsappIcon size={24} borderRadius={5} />
+                    </WhatsappShareButton>
+                    <RedditShareButton url={baseUrl + post?.slug}>
+                      <RedditIcon size={24} borderRadius={5} />
+                    </RedditShareButton>
+                    <InstapaperShareButton url={baseUrl + post?.slug}>
+                      <InstapaperIcon size={24} borderRadius={5} />
+                    </InstapaperShareButton>
+                  </S.ShareWrapper>
+                </S.MetaWrapper>
+                <S.Line />
+                <S.BodyWrapper
+                  dangerouslySetInnerHTML={{ __html: post?.body ?? '' }}
+                ></S.BodyWrapper>
+                <S.Line />
+                <SectionHeading title="You can also like" />
+                <S.RelatedContainer>
+                  {related?.posts?.map((card, index) => {
+                    return (
+                      card && <NewsCard key={index} {...(card as PostProps)} />
+                    )
                   })}
-              </S.SideCardsContainer>
-              <SectionHeading title="Follow us" />
-              <S.SocialBannersContainer>
-                {home?.home?.Social &&
-                  home?.home?.Social?.map((banner, index) => {
-                    return banner && <SocialBanner key={index} {...banner} />
-                  })}
-              </S.SocialBannersContainer>
-            </S.Section>
-          </S.MidSection>
-        </Container>
-      </S.PostContent>
-    </PostTemplate>
+                </S.RelatedContainer>
+                <DiscussionEmbed
+                  shortname="games-news-2"
+                  config={{
+                    url: baseUrl + post?.slug,
+                    identifier: post?.id,
+                    title: post?.title,
+                    language: 'en_US' //e.g. for Traditional Chinese (Taiwan)
+                  }}
+                />
+              </S.Section>
+              <S.Section>
+                <SectionHeading title="Most Viewed" />
+                <S.SideCardsContainer>
+                  {news?.posts &&
+                    news?.posts?.map((card, index) => {
+                      return card && <SideCard {...card} key={index} />
+                    })}
+                </S.SideCardsContainer>
+                <SectionHeading title="Follow us" />
+                <S.SocialBannersContainer>
+                  {home?.home?.Social &&
+                    home?.home?.Social?.map((banner, index) => {
+                      return banner && <SocialBanner key={index} {...banner} />
+                    })}
+                </S.SocialBannersContainer>
+              </S.Section>
+            </S.MidSection>
+          </Container>
+        </S.PostContent>
+      </PostTemplate>
+    </>
   )
 }
 
