@@ -3,6 +3,10 @@
 A project created using Typescript + GraphQL on front-end and Node with Strapi + MySQL on backend.
 The main porpouse of this project is to create posts on the server and display it on front-end.
 
+<p align="center">
+    <img src="https://github.com/gabrielsxp/games-news/edit/master/gif.gif" alt="Pay me Dude Landing"></img> 
+</p>
+
 ## Features
 - A special route on server to populate data from [Gamespot](https://gamespot.com).
 - All extracted images are uploaded to [Cloudinary](https://cloudinary) to not overload the server with image requests.
