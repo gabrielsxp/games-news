@@ -123,9 +123,9 @@ const Post = () => {
       </Head>
       <NextSeo>
         title={post?.title} description={post?.lede} canonical=
-        {`${process.env.HOST}/post/${post?.slug}`} openGraph=
+        {`${process.env.HOST}${post?.slug}`} openGraph=
         {{
-          url: `${process.env.HOST}/post/${post?.slug}`,
+          url: `${process.env.HOST}${post?.slug}`,
           title: `Game News - ${post?.title}`,
           description: post?.lede,
           images: [{ url: post?.image?.url }],

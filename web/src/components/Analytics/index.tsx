@@ -14,7 +14,7 @@ const Analytics = () => (
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', ${UAANALYTICS}, {
+            gtag('config', '${UAANALYTICS}', {
               page_path: window.location.pathname,
             });
           `
