@@ -10,9 +10,9 @@ function App({ Component, pageProps }: AppProps) {
     <ThemeProvider theme={theme}>
       <ChakraProvider>
         <Head>
-          <title>React Avançado - Boilerplate</title>
-          <link rel="shortcut icon" href="/img/icon-512.png" />
-          <link rel="apple-touch-icon" href="/img/icon-512.png" />
+          <title>Game News - The latest news about games worldwide</title>
+          <link rel="shortcut icon" href="/img/main-logo.svg" />
+          <link rel="apple-touch-icon" href="/img/main-logo.svg" />
           <link rel="manifest" href="/manifest.json" />
           <meta
             name="description"
