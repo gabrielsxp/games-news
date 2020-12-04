@@ -21,7 +21,7 @@ to install all dependencies of the project.
 
 ## Configurations
 
-- Create a file called .env.local on the root of web folder and change the variables accordingly of your enviroinment
+- Create a file called .env.local on the root of web folder and change the variables accordingly to your enviroinment
 
 ```bash
 ANALYTICS_UA=UA-XXXXXXXXX-X
