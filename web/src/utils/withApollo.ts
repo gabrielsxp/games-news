@@ -3,7 +3,7 @@ import { ApolloClient, InMemoryCache } from '@apollo/client'
 import { Post } from 'generated/graphql'
 
 const apolloClient = new ApolloClient({
-  uri: 'http://localhost:1337/graphql',
+  uri: 'https://games-news.herokuapp.com/graphql',
   cache: new InMemoryCache({
     typePolicies: {
       Query: {
