@@ -29,6 +29,12 @@ HOST=http://localhost:3000
 ```
 The application server repo is on [Game News Strapi Server](https://github.com/gabrielsxp/games-news/tree/master/server)
 
+## Tests
+
+```bash
+yarn test
+```
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
