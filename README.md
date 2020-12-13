@@ -7,6 +7,9 @@ The main porpouse of this project is to create posts on the server and display i
     <img src="https://github.com/gabrielsxp/games-news/blob/master/gif.gif" alt="Pay me Dude Landing"></img> 
 </p>
 
+## Live Version
+You can access a version of this project live in [Games News](http://games-news.kofastools.com)
+
 ## Features
 - A special route on server to populate data from [Gamespot](https://gamespot.com).
 - All extracted images are uploaded to [Cloudinary](https://cloudinary) to not overload the server with image requests.
